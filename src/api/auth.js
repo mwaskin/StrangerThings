@@ -37,7 +37,6 @@ export const fetchMe = async (token) => {
 		});
 
 		const { data } = await response.json();
-		console.log("my data: ", data);
 		return data;
 	} catch (err) {
 		//
