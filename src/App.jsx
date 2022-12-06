@@ -1,12 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Register from './components/Register'
 import { fetchMe } from './api/auth';
+import { fetchPosts } from './api/posts';
 
 import './App.css'
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [user, setUser] = useState({});
+  const [posts, setPosts] = useState([]);
 
   //Fetched the user object from a given token.
   useEffect(() => {
@@ -19,12 +21,22 @@ const App = () => {
     if(token) {
       getMe();
     }
-  }, [token]); //Update the user if the token changes
+  }, [token]);// update the user if the token changes
 
-  return(
+  useEffect(() => {
+    const getPosts = async () => {
+      const apiPosts = await fetchPosts();
+      setPosts(apiPosts);
+      console.log(posts);
+    }
+    getPosts();
+
+  }, []); //Update the user if the token changes
+
+  return (
     <div>
       <h1>{user?.username}</h1>
-      <Register setToken={setToken}/>
+      <Register setToken={setToken} />
     </div>
   )
 }
