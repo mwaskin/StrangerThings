@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Register from './components/Register'
 import { fetchMe } from './api/auth';
 import { fetchPosts } from './api/posts';
+import Posts from './components/Posts';
 
 import './App.css'
 
@@ -14,29 +15,29 @@ const App = () => {
   useEffect(() => {
     const getMe = async () => {
       const userObj = await fetchMe(token);
-      console.log(userObj);
       setUser(userObj);
     };
     //Only run getMe() if we have a token
     if(token) {
       getMe();
     }
-  }, [token]);// update the user if the token changes
+  }, [token]);// Update the user if the token changes
 
   useEffect(() => {
     const getPosts = async () => {
       const apiPosts = await fetchPosts();
+      console.log(apiPosts);
       setPosts(apiPosts);
-      console.log(posts);
     }
     getPosts();
 
-  }, []); //Update the user if the token changes
+  }, []);
 
   return (
     <div>
       <h1>{user?.username}</h1>
       <Register setToken={setToken} />
+      <Posts posts={posts}/>
     </div>
   )
 }

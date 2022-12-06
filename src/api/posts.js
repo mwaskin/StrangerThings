@@ -4,7 +4,7 @@ export const fetchPosts = async () => {
     try {
         const response = await fetch(`${COHORTAPI}/posts`)
         const { data: { posts } } = await response.json();
-        console.log(posts);
+        return posts;
     } catch (err) { }
 
 } 

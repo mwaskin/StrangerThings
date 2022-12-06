@@ -17,7 +17,6 @@ const Register = (props) => {
           const token = await registerUser(username, password);
           setToken(token);
           localStorage.setItem('token', token);
-          console.log('localstorage:', localStorage.getItem('token'))
         } catch (err) {
           console.error('this token shit didnt work', err)
         }
