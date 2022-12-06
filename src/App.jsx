@@ -8,16 +8,18 @@ const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [user, setUser] = useState({});
 
+  //Fetched the user object from a given token.
   useEffect(() => {
     const getMe = async () => {
-      const data = await fetchMe(token);
-      console.log(data);
-      setUser(data);
+      const userObj = await fetchMe(token);
+      console.log(userObj);
+      setUser(userObj);
     };
+    //Only run getMe() if we have a token
     if(token) {
       getMe();
     }
-  }, [token]);
+  }, [token]); //Update the user if the token changes
 
   return(
     <div>
