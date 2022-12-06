@@ -1,41 +1,42 @@
 import React, { useState } from "react";
-import { registerUser } from "../api/auth";
+import { registerUser } from "../api/auth.js";
 
 const Register = (props) => {
-	const setToken = props.setToken;
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+	const setToken = props.setToken;
+
 	return (
 		<div>
 			<form
-				onSubmit={async (event) => {
+				onSubmit={async (e) => {
+					e.preventDefault();
+
 					try {
-						event.preventDefault();
 						const token = await registerUser(username, password);
-						// console.log(token);
 						setToken(token);
 						localStorage.setItem("token", token);
-						// console.log(localStorage.getItem("token"));
-					} catch (error) {
-						console.log(error);
+						console.log("localstorage:", localStorage.getItem("token"));
+					} catch (err) {
+						//
 					}
 				}}
 			>
-				<label htmlFor="username">Username :</label>
+				<label htmlFor="username">Username: </label>
 				<input
-					value={username}
 					type="text"
-					placeholder="Username"
-					onChange={(event) => setUsername(event.target.value)}
-				></input>
-				<label htmlFor="password">Password :</label>
+					value={username}
+					placeholder="username"
+					onChange={(e) => setUsername(e.target.value)}
+				/>
+				<label htmlFor="password">Password: </label>
 				<input
+					type="text"
 					value={password}
-					type="password"
-					placeholder="Password"
-					onChange={(event) => setPassword(event.target.value)}
-				></input>
-				<button type="submit">Submit</button>
+					placeholder="password"
+					onChange={(e) => setPassword(e.target.value)}
+				/>
+				<input type="submit" value="Register Here!" />
 			</form>
 		</div>
 	);

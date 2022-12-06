@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
 import Register from "./components/Register";
 import { fetchMe } from "./api/auth";
 
-function App() {
+import "./App.css";
+
+const App = () => {
 	const [token, setToken] = useState(localStorage.getItem("token"));
 	const [user, setUser] = useState({});
 
 	useEffect(() => {
 		const getMe = async () => {
 			const data = await fetchMe(token);
+			console.log(data);
 			setUser(data);
 		};
 		if (token) {
@@ -18,11 +20,11 @@ function App() {
 	}, [token]);
 
 	return (
-		<div className="App">
+		<div>
 			<h1>{user?.username}</h1>
 			<Register setToken={setToken} />
 		</div>
 	);
-}
+};
 
 export default App;

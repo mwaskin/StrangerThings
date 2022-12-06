@@ -1,5 +1,5 @@
-const cohort = "2211-ftb-et-web-ft";
-const COHORTAPI = `https://strangers-things.herokuapp.com/api/${cohort}`;
+const COHORTAPI =
+	"https://strangers-things.herokuapp.com/api/2211-ftb-et-web-ft";
 
 export const registerUser = async (username, password) => {
 	try {
@@ -15,12 +15,13 @@ export const registerUser = async (username, password) => {
 				},
 			}),
 		});
+
 		const {
 			data: { token },
 		} = await response.json();
 		return token;
-	} catch (error) {
-		console.log(error);
+	} catch (err) {
+		//
 	}
 };
 
@@ -34,8 +35,9 @@ export const fetchMe = async (token) => {
 		});
 
 		const { data } = await response.json();
+		console.log("my data: ", data);
 		return data;
-	} catch (error) {
-		console.log(error);
+	} catch (err) {
+		//
 	}
 };
