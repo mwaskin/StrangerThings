@@ -1,10 +1,11 @@
 const COHORTAPI =
 	"https://strangers-things.herokuapp.com/api/2211-ftb-et-web-ft";
 
+// adds a user to the API based on the username and pw input in the form in Register component
 export const registerUser = async (username, password) => {
 	try {
 		const response = await fetch(`${COHORTAPI}/users/register`, {
-			method: "POST",
+			method: "POST", //to add a data object to the API
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -25,6 +26,7 @@ export const registerUser = async (username, password) => {
 	}
 };
 
+// GETs a logged-in user data from the API based on a valid user token passed
 export const fetchMe = async (token) => {
 	try {
 		const response = await fetch(`${COHORTAPI}/users/me`, {
