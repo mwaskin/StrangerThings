@@ -7,3 +7,10 @@
 3. Use the git remote workflow with your partner
 
 ### Reference the workshop for instructions!
+
+-get post to show on page
+-createa a form to login
+-
+
+
+-a button to login and logout
