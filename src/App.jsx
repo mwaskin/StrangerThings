@@ -37,14 +37,17 @@ const App = () => {
 		getPosts();
 	}, [postFlag]); //when postFlag increments this useEffect will run again
 
+	//write new func to change posts in state on account change so isAuthor will update without API call
+
+	const updatePosts = () => {
+		setPostFlag(postFlag + 1);
+	};
+
 	const signOut = () => {
 		setToken(undefined);
 		localStorage.clear();
 		setUser({});
-	};
-
-	const updatePosts = () => {
-		setPostFlag(postFlag + 1);
+		updatePosts();
 	};
 
 	const navToHome = () => {
@@ -82,7 +85,13 @@ const App = () => {
 				/>
 				<Route
 					path="signIn"
-					element={<LoginForm setToken={setToken} navToHome={navToHome} />}
+					element={
+						<LoginForm
+							setToken={setToken}
+							navToHome={navToHome}
+							updatePosts={updatePosts}
+						/>
+					}
 				/>
 			</Routes>
 		</div>

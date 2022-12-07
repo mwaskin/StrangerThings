@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { logIn } from "../api/auth";
 
-const LoginForm = ({ setToken, navToHome }) => {
+const LoginForm = ({ setToken, navToHome, updatePosts }) => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 
@@ -16,6 +16,7 @@ const LoginForm = ({ setToken, navToHome }) => {
 						setToken(token);
 						localStorage.setItem("token", token);
 						navToHome();
+						updatePosts();
 					} catch (err) {
 						console.error("this token shit didnt work", err);
 					}

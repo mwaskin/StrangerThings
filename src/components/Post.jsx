@@ -1,4 +1,5 @@
 import React from "react";
+import DeleteButton from "./DeleteButton";
 
 const Post = ({post}) => {
   let deliver;
@@ -18,6 +19,7 @@ const Post = ({post}) => {
           <p>Price: {post.price}</p>
           <p>Created at: {post.createdAt}</p>
           <p>Updated at: {post.updatedAt}</p>
+          {post.isAuthor ? <DeleteButton /> : null}
         </div>
     </>
   )
