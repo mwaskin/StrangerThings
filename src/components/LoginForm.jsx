@@ -7,6 +7,7 @@ const LoginForm = ({setToken, navToHome, updatePosts}) => {
 
 	return (
 		<div>
+			<h2>Log in Here!</h2>
 			<form
 				onSubmit={async (e) => {
 					e.preventDefault();

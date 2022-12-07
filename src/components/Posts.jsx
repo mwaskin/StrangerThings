@@ -5,8 +5,7 @@ import './Posts.css';
 
 //Modularize to individual posts
 //Turn post into separate page upon expansion with all details
-const Posts = (props) => {
-  const posts = props.posts;
+const Posts = ({ posts, removePost}) => {
 
   return (
     <div className="all-posts">{
@@ -14,7 +13,7 @@ const Posts = (props) => {
       ? posts.map(post => {
         return (
           <div key={post._id} className={'post'}>
-            <Post post={post}/>
+            <Post post={post} removePost={removePost}/>
           </div> 
         )
       })

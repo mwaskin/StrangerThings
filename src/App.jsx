@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { fetchMe } from './api/auth';
-import { fetchPosts } from './api/posts';
+import { fetchPosts, deletePost } from './api/posts';
 import Header from './components/Header';
 import Home from './components/Home';
 
@@ -50,6 +50,11 @@ const App = () => {
     updatePosts()
   }
 
+  const removePost = (postId) => {
+    deletePost(token, postId);
+    updatePosts();
+  }
+
   const navToHome = () => {
     navigate('/')
   }
@@ -66,7 +71,7 @@ const App = () => {
     <div className='root-container'>
       <Header user={user} token={token} signOut={signOut} navToRegister={navToRegister} navToSignIn={navToSignIn} navToHome={navToHome}/>
       <Routes>
-        <Route path='/' element={<Home posts={posts} token={token} updatePosts={updatePosts}/>}/>
+        <Route path='/' element={<Home posts={posts} token={token} updatePosts={updatePosts} removePost={removePost}/>}/>
         <Route path='register' element={<Register setToken={setToken} navToHome={navToHome}/>}/>
         <Route path='signIn' element={<LoginForm setToken={setToken} navToHome={navToHome} updatePosts={updatePosts}/>}/>
       </Routes>
