@@ -1,0 +1,7 @@
+.post-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: darkslateblue;
+  padding: 1rem;
+}

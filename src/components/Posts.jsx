@@ -1,4 +1,5 @@
 import React from "react";
+import Post from "./Post";
 
 import './Posts.css';
 
@@ -9,17 +10,15 @@ const Posts = (props) => {
 
   return (
     <div className="all-posts">{
-      posts.map(post => {
+      posts.length 
+      ? posts.map(post => {
         return (
           <div key={post._id} className={'post'}>
-            <h3>{post.author.username}</h3>
-            <div className="post-body">
-              <h4>{post.title}</h4>
-              <p>{post.description}</p>
-            </div>
+            <Post post={post}/>
           </div> 
         )
       })
+      : <h2>No posts yet pal.</h2>
     }
     </div>
   )
