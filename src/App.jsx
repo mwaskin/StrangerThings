@@ -13,6 +13,8 @@ const App = () => {
 	const [token, setToken] = useState(localStorage.getItem("token"));
 	const [user, setUser] = useState({});
 	const [posts, setPosts] = useState([]);
+  //fetchs posts if the user updates them
+  const [postFlag, setPostFlag] = useState(0);
   const navigate = useNavigate();
 
 	//Fetched the user object from a given token.
@@ -30,16 +32,19 @@ const App = () => {
 	useEffect(() => {
 		const getPosts = async () => {
 			const apiPosts = await fetchPosts();
-			console.log(apiPosts);
 			setPosts(apiPosts);
 		};
 		getPosts();
-	}, []);
+	}, [postFlag]); //when postFlag increments this useEffect will run again
 
   const signOut = () => {
     setToken(undefined);
     localStorage.clear();
-    setUser({})
+    setUser({});
+  }
+
+  const updatePosts = () => {
+    setPostFlag(postFlag + 1);
   }
 
   const navToHome = () => {
@@ -58,7 +63,7 @@ const App = () => {
     <div className='root-container'>
       <Header user={user} token={token} signOut={signOut} navToRegister={navToRegister} navToSignIn={navToSignIn} navToHome={navToHome}/>
       <Routes>
-        <Route path='/' element={<Home posts={posts} token={token} />}/>
+        <Route path='/' element={<Home posts={posts} token={token} updatePosts={updatePosts}/>}/>
         <Route path='register' element={<Register setToken={setToken} navToHome={navToHome}/>}/>
         <Route path='signIn' element={<LoginForm setToken={setToken} navToHome={navToHome}/>}/>
       </Routes>

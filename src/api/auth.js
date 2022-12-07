@@ -63,7 +63,7 @@ export const logIn = async (username, password) => {
 		return token;
 	} catch (error) {
 		console.error(
-			"This username and password combination does not exist. Please try again or click Register to create a new account."
+			"This username and password combination does not exist. Please try again or click Register to create a new account.", error
 		);
 	}
 };

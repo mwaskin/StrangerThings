@@ -1,7 +1,4 @@
 import React from "react";
-import Register from "./Register";
-import LoginForm from "./LoginForm";
-import SignOut from "./SignOut";
 
 const AccountButtons = ({token, signOut, navToHome, navToRegister, navToSignIn}) => {
   return (

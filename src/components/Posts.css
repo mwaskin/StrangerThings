@@ -3,7 +3,9 @@
 }
 
 .post {
-  background-color:darkgreen;
+  background-color: darkgreen;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .post-body {
