@@ -1,7 +1,25 @@
+.post-form {
+  margin-left: 5rem;
+}
+
 .post {
   background-color:darkgreen;
 }
 
 .post-body {
   text-align: left;
+}
+
+.isActive {
+  width: 30px;
+  height: 30px;
+}
+
+/* Change to a checkbox or the like */
+.true {
+  background-color: red;
+}
+
+.false {
+  background-color: black;
 }

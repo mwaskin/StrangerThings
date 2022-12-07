@@ -16,6 +16,7 @@ const Register = (props) => {
         try {
           const token = await registerUser(username, password);
           setToken(token);
+          //set localStorage on check box
           localStorage.setItem('token', token);
         } catch (err) {
           console.error('this token shit didnt work', err)

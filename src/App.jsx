@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Register from './components/Register'
 import { fetchMe } from './api/auth';
 import { fetchPosts } from './api/posts';
+import Header from './components/Header';
 import Posts from './components/Posts';
+import FormContainer from './components/FormContainer';
 
 import './App.css'
 
@@ -33,11 +34,14 @@ const App = () => {
 
   }, []);
 
+  //separate main out
   return (
-    <div>
-      <h1>{user?.username}</h1>
-      <Register setToken={setToken} />
-      <Posts posts={posts}/>
+    <div className='root-container'>
+      <Header user={user} setToken={setToken}/>
+      <div className="main">
+        <Posts posts={posts}/>
+        <FormContainer token={token}/>
+      </div>
     </div>
   )
 }

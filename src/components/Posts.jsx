@@ -1,4 +1,5 @@
 import React from "react";
+import Post from "./Post";
 
 import './Posts.css';
 
@@ -12,11 +13,7 @@ const Posts = (props) => {
       posts.map(post => {
         return (
           <div key={post._id} className={'post'}>
-            <h3>{post.author.username}</h3>
-            <div className="post-body">
-              <h4>{post.title}</h4>
-              <p>{post.description}</p>
-            </div>
+            <Post post={post}/>
           </div> 
         )
       })
