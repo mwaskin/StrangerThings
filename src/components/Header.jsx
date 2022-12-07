@@ -1,13 +1,12 @@
 import React from "react";
-import Register from "./Register";
+import AccountButtons from "./AccountButtons";
 
-const Header = ({user, setToken}) => {
+const Header = ({user, signOut, token, navToHome, navToRegister, navToSignIn}) => {
   return (
     <div className="header">
       <h1>Stranger's Things!</h1>
-      <h2>Hey, {user?.username}</h2>
-      {/* Change to register or login button container. ---Register---  ---Sign in--- // ---Sign Out --- */} 
-      <Register setToken={setToken} />
+      {token ? <h2>Hey, {user?.username}</h2> : <h2>Howdy Trader</h2>}
+      <AccountButtons token={token } signOut={signOut} navToHome={navToHome} navToRegister={navToRegister} navToSignIn={navToSignIn}/>
     </div>
   )
 }

@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import { fetchMe } from './api/auth';
 import { fetchPosts } from './api/posts';
 import Header from './components/Header';
-import Posts from './components/Posts';
-import FormContainer from './components/FormContainer';
+import Home from './components/Home';
 
 import "./App.css";
+import Register from './components/Register';
+import LoginForm from './components/LoginForm';
 
 const App = () => {
 	const [token, setToken] = useState(localStorage.getItem("token"));
 	const [user, setUser] = useState({});
 	const [posts, setPosts] = useState([]);
+  const navigate = useNavigate();
 
 	//Fetched the user object from a given token.
 	useEffect(() => {
@@ -33,14 +36,35 @@ const App = () => {
 		getPosts();
 	}, []);
 
-  //separate main out
+  const signOut = () => {
+    setToken(undefined);
+    localStorage.clear();
+    setUser({})
+  }
+
+  const navToHome = () => {
+    navigate('/')
+  }
+
+  const navToRegister = () => {
+    navigate('/register')
+  }
+
+  const navToSignIn = () => {
+    navigate('/signIn')
+  }
+
   return (
     <div className='root-container'>
-      <Header user={user} setToken={setToken}/>
-      <div className="main">
-        <Posts posts={posts}/>
-        <FormContainer token={token}/>
-      </div>
+      <Header user={user} token={token} signOut={signOut} navToRegister={navToRegister} navToSignIn={navToSignIn} navToHome={navToHome}/>
+      <Routes>
+        <Route path='/' element={<Home posts={posts} token={token} />}/>
+        <Route path='register' element={<Register setToken={setToken} navToHome={navToHome}/>}/>
+        <Route path='signIn' element={<LoginForm setToken={setToken} navToHome={navToHome}/>}/>
+      </Routes>
+      
     </div>
   )
 }
+
+export default App

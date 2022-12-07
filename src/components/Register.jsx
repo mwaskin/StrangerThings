@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { registerUser } from "../api/auth.js";
 
-const Register = (props) => {
+const Register = ({setToken, navToHome}) => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const setToken = props.setToken;
 
 	return (
 		<div>
+      <h2>Register for Our Site Here</h2>
 			<form
 				onSubmit={async (e) => {
 					e.preventDefault();
@@ -17,6 +17,7 @@ const Register = (props) => {
           setToken(token);
           //set localStorage on check box
           localStorage.setItem('token', token);
+          navToHome();
         } catch (err) {
           console.error('this token shit didnt work', err)
         }
