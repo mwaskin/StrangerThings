@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
-import {
-  registerUser
-} from '../api/auth.js'
+import React, { useState } from "react";
+import { registerUser } from "../api/auth.js";
 
 const Register = (props) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const setToken = props.setToken;
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const setToken = props.setToken;
 
-  return (
-    <div>
-      <form onSubmit={async (e) => {
-        e.preventDefault();
+	return (
+		<div>
+			<form
+				onSubmit={async (e) => {
+					e.preventDefault();
 
         try {
           const token = await registerUser(username, password);
