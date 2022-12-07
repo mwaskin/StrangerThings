@@ -42,3 +42,28 @@ export const fetchMe = async (token) => {
 		//
 	}
 };
+
+export const logIn = async (username, password) => {
+	try {
+		const response = await fetch(`${COHORTAPI}/users/login`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				user: {
+					username,
+					password,
+				},
+			}),
+		});
+		const {
+			data: { token },
+		} = await response.json();
+		return token;
+	} catch (error) {
+		console.error(
+			"This username and password combination does not exist. Please try again or click Register to create a new account."
+		);
+	}
+};
