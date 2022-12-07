@@ -17,7 +17,7 @@
 - [ ] Style header to stick to the top and add some content to the account pages
 - [ ] Ask about weird given css: logo, animation, read-the-docs
 
-- [ ] Update posts on:
+- [ ] Update posts on: (try to limit API calls and update local state instead)
 - [x] New post 
 - [ ] Deletion 
 - [ ] Edit
@@ -29,4 +29,5 @@
 - [ ] JSX
 - [ ] Filter Algo (try to filter for title first, then add users and descriptions)
 
-- [ ] Convert to react UI framework
+- [ ] Convert to react UI framework:
+- [ ] Convert new post to flyout activated by button

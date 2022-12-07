@@ -32,7 +32,7 @@ const Register = ({setToken, navToHome}) => {
           onChange={(e) => setUsername(e.target.value)} />
         <label htmlFor="password">Password: </label>
         <input
-          type="text"
+          type="password"
           value={password}
           minLength={4}
           required={true}
