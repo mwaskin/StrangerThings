@@ -16,7 +16,7 @@ const NewPostForm = ({token, updatePosts}) => {
       <form className="post-form" onSubmit={(e) => {
           e.preventDefault();
 
-          try {
+          try { //WARN: submitPost will still run if another func in block throws an error. This leads to double posting, be careful when modifying.
             submitPost(token, title, description, price, location, willDeliver)
             updatePosts();
             e.target.reset();

@@ -31,7 +31,7 @@ const App = () => {
 
 	useEffect(() => {
 		const getPosts = async () => {
-			const apiPosts = await fetchPosts();
+			const apiPosts = await fetchPosts(token);
 			setPosts(apiPosts);
 		};
 		getPosts();

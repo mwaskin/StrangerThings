@@ -25,3 +25,7 @@
 .false {
   background-color: black;
 }
+
+.is-author {
+  background-color: darkred;
+}
