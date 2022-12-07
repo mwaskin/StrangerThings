@@ -39,15 +39,15 @@ const App = () => {
 
   //write new func to change posts in state on account change so isAuthor will update without API call
 
+  const updatePosts = () => {
+    setPostFlag(postFlag + 1);
+  }
+
   const signOut = () => {
     setToken(undefined);
     localStorage.clear();
     setUser({});
-    setPostFlag(postFlag + 1)
-  }
-
-  const updatePosts = () => {
-    setPostFlag(postFlag + 1);
+    updatePosts()
   }
 
   const navToHome = () => {
@@ -68,7 +68,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home posts={posts} token={token} updatePosts={updatePosts}/>}/>
         <Route path='register' element={<Register setToken={setToken} navToHome={navToHome}/>}/>
-        <Route path='signIn' element={<LoginForm setToken={setToken} navToHome={navToHome} postFlag={postFlag} setPostFlag={setPostFlag}/>}/>
+        <Route path='signIn' element={<LoginForm setToken={setToken} navToHome={navToHome} updatePosts={updatePosts}/>}/>
       </Routes>
     </div>
   )
