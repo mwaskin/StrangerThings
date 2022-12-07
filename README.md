@@ -8,9 +8,25 @@
 
 ### Reference the workshop for instructions!
 
--get post to show on page
--createa a form to login
--
 
+#### TODO
+- [x] Set up router to work with register and sign in buttons
+- [x] Functional account buttons, pages, and routing
+- [x] Implement post functionality. Needs: Title, descp., price, location(optional), willDeliever(bool, optional, default: false)
+- [ ] Form validation for registration - bad usernames and passwords (regex) 
+- [ ] Style header to stick to the top and add some content to the account pages
+- [ ] Ask about weird given css: logo, animation, read-the-docs
 
--a button to login and logout
+- [ ] Update posts on:
+- [x] New post 
+- [ ] Deletion 
+- [ ] Edit
+
+- [ ] Add additional functionality for isAuthor:true posts.
+- [ ] Add delete for user posts
+- [ ] Add messaging functionality
+- [ ] Add search form:
+- [ ] JSX
+- [ ] Filter Algo (try to filter for title first, then add users and descriptions)
+
+- [ ] Convert to react UI framework
