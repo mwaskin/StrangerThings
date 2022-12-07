@@ -26,12 +26,16 @@ const Register = ({setToken, navToHome}) => {
         <input
           type="text"
           value={username}
+          minLength={1}
+          required={true}
           placeholder='username'
           onChange={(e) => setUsername(e.target.value)} />
         <label htmlFor="password">Password: </label>
         <input
           type="text"
           value={password}
+          minLength={4}
+          required={true}
           placeholder='password'
           onChange={(e) => setPassword(e.target.value)} />
         <input type='submit' value="Register Here!" />
