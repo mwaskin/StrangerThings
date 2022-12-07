@@ -5,6 +5,7 @@ import { fetchPosts } from "./api/posts";
 import Posts from "./components/Posts";
 
 import "./App.css";
+import LoginForm from "./components/LoginForm";
 
 const App = () => {
 	const [token, setToken] = useState(localStorage.getItem("token"));
@@ -36,6 +37,7 @@ const App = () => {
 		<div>
 			<h1>{user?.username}</h1>
 			<Register setToken={setToken} />
+			<LoginForm setToken={setToken} />
 			<Posts posts={posts} />
 		</div>
 	);

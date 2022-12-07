@@ -16,6 +16,12 @@ const LoginForm = (props) => {
 						const token = await logIn(username, password);
 						setToken(token);
 						localStorage.setItem("token", token);
+						const rememberUserCb = document.querySelector("#rememberUser");
+
+						//will use to determine whether to clear localStorage when we exit window
+						if (rememberUserCb.value) {
+							localStorage.setItem("rememberUser", "true");
+						}
 					} catch (err) {
 						console.error("this token shit didnt work", err);
 					}
@@ -36,6 +42,13 @@ const LoginForm = (props) => {
 					onChange={(e) => setPassword(e.target.value)}
 				/>
 				<input type="submit" value="Log In" />
+				<label htmlFor="rememberUser">Keep me signed in: </label>
+				<input
+					type="checkbox"
+					id="rememberUser"
+					name="rememberUser"
+					value="true"
+				/>
 			</form>
 		</div>
 	);
