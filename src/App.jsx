@@ -67,7 +67,6 @@ const App = () => {
         <Route path='register' element={<Register setToken={setToken} navToHome={navToHome}/>}/>
         <Route path='signIn' element={<LoginForm setToken={setToken} navToHome={navToHome}/>}/>
       </Routes>
-      
     </div>
   )
 }

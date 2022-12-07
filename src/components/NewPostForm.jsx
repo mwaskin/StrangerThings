@@ -18,8 +18,8 @@ const NewPostForm = ({token, updatePosts}) => {
 
           try { //WARN: submitPost will still run if another func in block throws an error. This leads to double posting, be careful when modifying.
             submitPost(token, title, description, price, location, willDeliver)
-            updatePosts();
-            e.target.reset();
+            updatePosts(); //calls useEffects to fetch posts
+            e.target.reset(); 
           } catch (err) {
             console.error("That post ain't happenin bud.", err)
           }
@@ -37,7 +37,7 @@ const NewPostForm = ({token, updatePosts}) => {
         <input type="text" onChange={(e) => setLocation(e.target.value)}/>
 
         <label htmlFor="post-will-deliver">Will you deliver?</label>
-        <input type="checkbox" onChange={(e) => setWillDeliver(!willDeliver)}/>
+        <input type="checkbox" onChange={() => setWillDeliver(!willDeliver)}/>
 
         <input type="submit" value='Post it!'/>
       </form>

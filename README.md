@@ -14,6 +14,7 @@
 - [x] Functional account buttons, pages, and routing
 - [x] Implement post functionality. Needs: Title, descp., price, location(optional), willDeliever(bool, optional, default: false)
 - [ ] Form validation for registration - bad usernames and passwords (regex) 
+- [ ] Add remember me to reg and sign in
 - [ ] Style header to stick to the top and add some content to the account pages
 - [ ] Ask about weird given css: logo, animation, read-the-docs
 
