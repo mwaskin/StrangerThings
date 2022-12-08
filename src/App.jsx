@@ -8,6 +8,8 @@ import Home from './components/Home';
 import Profile from './components/Profile';
 import Register from './components/Register';
 import LoginForm from './components/LoginForm';
+import UserPosts from './components/UserPosts';
+import UserMessages from './components/UserMessages';
 
 import "./App.css";
 
@@ -74,6 +76,7 @@ const App = () => {
     navigate('/profile');
   }
 
+
   return (
     <div className='root-container'>
       <Header user={user} token={token} signOut={signOut} navToRegister={navToRegister} navToSignIn={navToSignIn} navToHome={navToHome} navToProfile={navToProfile}/>
@@ -81,7 +84,10 @@ const App = () => {
         <Route path='/' element={<Home posts={posts} token={token} setPosts={setPosts} removePost={removePost}/>}/>
         <Route path='register' element={<Register setToken={setToken} navToHome={navToHome}/>}/>
         <Route path='signIn' element={<LoginForm setToken={setToken} navToHome={navToHome} updatePosts={updatePosts}/>}/>
-        <Route path='profile' element={<Profile user={user} removePost={removePost}/>} />
+        <Route path='profile' element={<Profile user={user}/>}>
+          <Route path='profile/my_posts' element={<UserPosts user={user} removePost={removePost}/>}/>
+          <Route path='profile/my_messages' element={<UserMessages user={user}/>}/>
+        </Route>
       </Routes>
     </div>
   )

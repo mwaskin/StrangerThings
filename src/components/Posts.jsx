@@ -5,31 +5,36 @@ import { reversePostSort } from "../helpers";
 import './Posts.css';
 
 //Turn post into separate page upon expansion with all details
-const Posts = ({ posts, removePost }) => {
+const Posts = ({ posts, removePost, showInactive }) => {
   const [defaultSort, setDefaultSort] = useState(true);
-  //const [displayPosts, setDisplayPosts] = useState([...posts])
+  const [displayPosts, setDisplayPosts] = useState([...posts])
   let sortDirectionString = 'chronological';
+  
   // set posts in reverse order
-
-  /* const sortPosts = () => {
+   const sortPosts = () => {
     if (!defaultSort) {
       sortDirectionString = 'chronological'
     } else {
       sortDirectionString = 'reverse chronological'
     }
-    setDisplayPosts(reversePostSort(displayPosts))
+    setDisplayPosts(reversePostSort([...displayPosts]))
     setDefaultSort(!defaultSort)
-  } */
-  /* if(displayPosts.length === 0) {
-    setDisplayPosts([...posts])
-  } */
+  }
+  
+  //Handles all posts mutations: sort, isActive, search query
+  const postFilter = () => {
+    //sort
+    //isActive for profile
+    //search queries
+  }
+  
   //console.log(displayPosts)
 
   return (
     <div className="sorting-container">
       {/* need to fix css first. */}
 
-      <button type="button" onClick={() => {/* sortPosts */}}>Reverse Sort</button>
+      <button type="button" onClick={() => {sortPosts}}>Reverse Sort</button>
       <span>Sorted by {sortDirectionString}</span>
       <div className="all-posts">{
         posts.length 
