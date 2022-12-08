@@ -4,9 +4,12 @@ import Posts from "./Posts";
 const UserPosts = ({user, removePost}) => {
   const [showInactive, setShowInactive] = useState(false)
 
+
   const toggleInactivePosts = () => {
     setShowInactive(!showInactive);
   }
+
+  
   
   return (
     <>

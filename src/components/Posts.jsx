@@ -3,26 +3,34 @@ import Post from "./Post";
 import { reversePostSort, activePostView } from "../helpers";
 
 import './Posts.css';
+import { useEffect } from "react";
 
 //Turn post into separate page upon expansion with all details
 const Posts = ({ posts, removePost, showInactive }) => {
   const [defaultSort, setDefaultSort] = useState(true);
   const [displayPosts, setDisplayPosts] = useState([])
-  const [sortDirectionString, setSortDirectionString] = useState('chronological');
+  const [sortDirectionString, setSortDirectionString] = useState('oldest first');
   
   const initDisplayPosts = () => {
     if(!displayPosts.length) {
       setDisplayPosts([...posts])
     }
   }
+
+  useEffect(() => {
+    //need to account for reversed posts somewhere, react is not happy with resetting the posts here. Think it would need to be in a separate function
+    setDisplayPosts(activePostView(posts, displayPosts, showInactive));
+    console.log(displayPosts)
+  }, [showInactive])
+
   // set posts in reverse order
    const sortPosts = () => {
     if (!defaultSort) {
-      setSortDirectionString('chronological')
+      setSortDirectionString('oldest first')
     } else {
-      setSortDirectionString('reverse chronological')
+      setSortDirectionString('newest first')
     }
-    setDisplayPosts(reversePostSort([...displayPosts]))
+    setDisplayPosts(reversePostSort(displayPosts))
     setDefaultSort(!defaultSort)
   }
   
@@ -31,7 +39,7 @@ const Posts = ({ posts, removePost, showInactive }) => {
   const postFilter = () => {
     
     //isActive for profile
-    setDisplayPosts(activePostView(displayPosts, showInactive));
+    
 
     //search queries
   }

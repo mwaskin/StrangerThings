@@ -8,10 +8,12 @@ export const reversePostSort = (posts) => {
   return posts.reverse()
 }
 
-export const activePostView = (posts, showInactive) => {
+export const activePostView = (defaultPosts, posts, showInactive) => {
   if (showInactive){
-    return posts
+    console.log(showInactive)
+    return defaultPosts
   } else {
+    console.log(showInactive)
     return posts.filter(post => {
       return post.active
     })
