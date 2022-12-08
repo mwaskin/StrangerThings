@@ -4,10 +4,10 @@ import { fetchMe } from "./api/auth";
 import { fetchPosts } from "./api/posts";
 import Header from "./components/Header";
 import Home from "./components/Home";
-
 import "./App.css";
 import Register from "./components/Register";
 import LoginForm from "./components/LoginForm";
+import Profile from "./components/Profile";
 
 const App = () => {
 	const [token, setToken] = useState(localStorage.getItem("token"));
@@ -48,6 +48,7 @@ const App = () => {
 		localStorage.clear();
 		setUser({});
 		updatePosts();
+		navToHome();
 	};
 
 	const navToHome = () => {
@@ -62,6 +63,10 @@ const App = () => {
 		navigate("/signIn");
 	};
 
+	const navToProfile = () => {
+		navigate("/profile");
+	};
+
 	return (
 		<div className="root-container">
 			<Header
@@ -71,6 +76,7 @@ const App = () => {
 				navToRegister={navToRegister}
 				navToSignIn={navToSignIn}
 				navToHome={navToHome}
+				navToProfile={navToProfile}
 			/>
 			<Routes>
 				<Route
@@ -93,6 +99,7 @@ const App = () => {
 						/>
 					}
 				/>
+				<Route path="profile" element={<Profile username={user.username} />} />
 			</Routes>
 		</div>
 	);
