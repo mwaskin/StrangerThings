@@ -4,9 +4,11 @@ import { logIn } from "../api/auth";
 const LoginForm = ({ setToken, navToHome, updatePosts }) => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+	const [rememberMe, setRememberMe] = useState(false);
 
 	return (
 		<div>
+			<h2>Log in Here!</h2>
 			<form
 				onSubmit={async (e) => {
 					e.preventDefault();
@@ -14,7 +16,7 @@ const LoginForm = ({ setToken, navToHome, updatePosts }) => {
 					try {
 						const token = await logIn(username, password);
 						setToken(token);
-						localStorage.setItem("token", token);
+						rememberMe ? localStorage.setItem("token", token) : null;
 						navToHome();
 						updatePosts();
 					} catch (err) {
@@ -37,12 +39,12 @@ const LoginForm = ({ setToken, navToHome, updatePosts }) => {
 					onChange={(e) => setPassword(e.target.value)}
 				/>
 				<input type="submit" value="Log In" />
-				<label htmlFor="rememberUser">Keep me signed in: </label>
+				<label htmlFor="remember">Remember Me</label>
 				<input
 					type="checkbox"
-					id="rememberUser"
-					name="rememberUser"
-					value="true"
+					onChange={() => {
+						setRememberMe(!rememberMe);
+					}}
 				/>
 			</form>
 		</div>

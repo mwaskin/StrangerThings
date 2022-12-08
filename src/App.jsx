@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { fetchMe } from "./api/auth";
@@ -8,6 +9,20 @@ import "./App.css";
 import Register from "./components/Register";
 import LoginForm from "./components/LoginForm";
 import Profile from "./components/Profile";
+=======
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom'
+import { fetchMe } from './api/auth';
+import { fetchPosts, deletePost } from './api/posts';
+import { removePostFromState } from './helpers';
+import Header from './components/Header';
+import Home from './components/Home';
+import Profile from './components/Profile';
+import Register from './components/Register';
+import LoginForm from './components/LoginForm';
+>>>>>>> 9123153834501f9db7efce6c3ea187f23e4cb454
+
+import "./App.css";
 
 const App = () => {
 	const [token, setToken] = useState(localStorage.getItem("token"));
@@ -51,6 +66,7 @@ const App = () => {
 		navToHome();
 	};
 
+<<<<<<< HEAD
 	const navToHome = () => {
 		navigate("/");
 	};
@@ -104,5 +120,48 @@ const App = () => {
 		</div>
 	);
 };
+=======
+  const signOut = () => {
+    setToken(undefined);
+    localStorage.clear();
+    setUser({});
+    updatePosts()
+    navToHome();
+  }
+
+  const removePost = (postId) => {
+    deletePost(token, postId);
+    setPosts(removePostFromState(posts, postId));
+  }
+
+  const navToHome = () => {
+    navigate('/');
+  }
+
+  const navToRegister = () => {
+    navigate('/register');
+  }
+
+  const navToSignIn = () => {
+    navigate('/signIn');
+  }
+
+  const navToProfile = () => {
+    navigate('/profile');
+  }
+
+  return (
+    <div className='root-container'>
+      <Header user={user} token={token} signOut={signOut} navToRegister={navToRegister} navToSignIn={navToSignIn} navToHome={navToHome} navToProfile={navToProfile}/>
+      <Routes>
+        <Route path='/' element={<Home posts={posts} token={token} setPosts={setPosts} removePost={removePost}/>}/>
+        <Route path='register' element={<Register setToken={setToken} navToHome={navToHome}/>}/>
+        <Route path='signIn' element={<LoginForm setToken={setToken} navToHome={navToHome} updatePosts={updatePosts}/>}/>
+        <Route path='profile' element={<Profile user={user} removePost={removePost}/>} />
+      </Routes>
+    </div>
+  )
+}
+>>>>>>> 9123153834501f9db7efce6c3ea187f23e4cb454
 
 export default App;
