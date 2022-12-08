@@ -1,50 +1,45 @@
-<<<<<<< HEAD
-import React from "react";
-
-const Profile = ({ username }) => {
-	return <header>{username}'s Profile</header>;
-};
-
-export default Profile;
-=======
 import React, { useState } from "react";
 import Post from "./Post";
 import Message from "./Message";
 
-import './Profile.css'
+import "./Profile.css";
 
-const Profile = ({user, removePost}) => {
-  
-  return (
-    <>
-      <header>{user.username}'s Profile</header>
-      <div className="profile-sections">
-        <section className="user-posts">{
-          user.posts
-          ? user.posts.map(post => {
-            return (
-              <div key={post._id} className={'post'}>
-                <Post post={post}  removePost={removePost} />
-              </div>
-            )
-          })
-          : null
-        }</section>
-        <section className="user-messages">{
-          user.messages && user.messages.length
-          ? user.messages.map(message => {
-            return (
-              <div key={message._id} className="message">
-                <Message postHead={message.post} fromUser={message.fromUser} content={message.content}/>
-              </div>
-            )
-          })
-          : <div>No messages yet.</div>
-        }</section>
-      </div>
-    </>
-  )
-}
+const Profile = ({ user, removePost }) => {
+	return (
+		<>
+			<header>{user.username}'s Profile</header>
+			<div className="profile-sections">
+				<section className="user-posts">
+					{user.posts
+						? user.posts.map((post) => {
+								return (
+									<div key={post._id} className={"post"}>
+										<Post post={post} removePost={removePost} />
+									</div>
+								);
+						  })
+						: null}
+				</section>
+				<section className="user-messages">
+					{user.messages && user.messages.length ? (
+						user.messages.map((message) => {
+							return (
+								<div key={message._id} className="message">
+									<Message
+										postHead={message.post}
+										fromUser={message.fromUser}
+										content={message.content}
+									/>
+								</div>
+							);
+						})
+					) : (
+						<div>No messages yet.</div>
+					)}
+				</section>
+			</div>
+		</>
+	);
+};
 
-export default Profile
->>>>>>> 9123153834501f9db7efce6c3ea187f23e4cb454
+export default Profile;
