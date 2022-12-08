@@ -5,7 +5,7 @@ import { reversePostSort } from "../helpers";
 import './Posts.css';
 
 //Turn post into separate page upon expansion with all details
-const Posts = ({ posts, removePost}) => {
+const Posts = ({ posts, removePost }) => {
   let defaultSort = true;
   let sortDirectionString;
   const displayPosts = posts;
