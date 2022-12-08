@@ -4,6 +4,7 @@ import { registerUser } from "../api/auth.js";
 const Register = ({setToken, navToHome}) => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
 
 	return (
 		<div>
@@ -16,7 +17,7 @@ const Register = ({setToken, navToHome}) => {
           const token = await registerUser(username, password);
           setToken(token);
           //set localStorage on check box
-          localStorage.setItem('token', token);
+          rememberMe ? localStorage.setItem('token', token) : null;
           navToHome();
         } catch (err) {
           console.error('this token shit didnt work', err)
@@ -39,6 +40,8 @@ const Register = ({setToken, navToHome}) => {
           placeholder='password'
           onChange={(e) => setPassword(e.target.value)} />
         <input type='submit' value="Register Here!" />
+        <label htmlFor="remember">Remember Me</label>
+        <input type="checkbox" onChange={() => { setRememberMe(!rememberMe) }} />
       </form>
     </div>
   )

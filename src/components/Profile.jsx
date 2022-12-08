@@ -6,9 +6,6 @@ import './Profile.css'
 
 const Profile = ({user, removePost}) => {
   
-
-
-
   return (
     <>
       <header>{user.username}'s Profile</header>
@@ -25,7 +22,7 @@ const Profile = ({user, removePost}) => {
           : null
         }</section>
         <section className="user-messages">{
-          user.messages.length
+          user.messages && user.messages.length
           ? user.messages.map(message => {
             return (
               <div key={message._id} className="message">

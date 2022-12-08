@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { fetchMe } from './api/auth';
 import { fetchPosts, deletePost } from './api/posts';
+import { removePostFromState } from './helpers';
 import Header from './components/Header';
 import Home from './components/Home';
 import Profile from './components/Profile';
@@ -52,10 +53,9 @@ const App = () => {
     navToHome();
   }
 
-  //not updating page yet.
   const removePost = (postId) => {
     deletePost(token, postId);
-    updatePosts();
+    setPosts(removePostFromState(posts, postId));
   }
 
   const navToHome = () => {
@@ -78,7 +78,7 @@ const App = () => {
     <div className='root-container'>
       <Header user={user} token={token} signOut={signOut} navToRegister={navToRegister} navToSignIn={navToSignIn} navToHome={navToHome} navToProfile={navToProfile}/>
       <Routes>
-        <Route path='/' element={<Home posts={posts} token={token} updatePosts={updatePosts} removePost={removePost}/>}/>
+        <Route path='/' element={<Home posts={posts} token={token} setPosts={setPosts} removePost={removePost}/>}/>
         <Route path='register' element={<Register setToken={setToken} navToHome={navToHome}/>}/>
         <Route path='signIn' element={<LoginForm setToken={setToken} navToHome={navToHome} updatePosts={updatePosts}/>}/>
         <Route path='profile' element={<Profile user={user} removePost={removePost}/>} />

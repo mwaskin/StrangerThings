@@ -3,7 +3,7 @@ import { submitPost } from "../api/posts";
 
 import './NewPostForm.css'
 
-const NewPostForm = ({token, updatePosts}) => {
+const NewPostForm = ({token, posts, setPosts}) => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState('')
@@ -13,12 +13,12 @@ const NewPostForm = ({token, updatePosts}) => {
   return (
     <aside className="post-form-container">
       <h2>Make a new post</h2>
-      <form className="post-form" onSubmit={(e) => {
+      <form className="post-form" onSubmit={async (e) => {
           e.preventDefault();
 
           try { //WARN: submitPost will still run if another func in block throws an error. This leads to double posting, be careful when modifying.
-            submitPost(token, title, description, price, location, willDeliver)
-            updatePosts(); //calls useEffects to fetch posts
+            const newPost = await submitPost(token, title, description, price, location, willDeliver)
+            setPosts([...posts, newPost]); 
             e.target.reset(); 
           } catch (err) {
             console.error("That post ain't happenin bud.", err)

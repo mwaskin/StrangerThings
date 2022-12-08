@@ -38,6 +38,10 @@ export const submitPost = async (token, title, description, price, location, wil
 				}
   		})
 		})
+		const { 
+			data: { post }, 
+		} = await response.json()
+		return post
 	} catch (err) {
 		console.error("Can't submit that post bud.", err)
 	}
