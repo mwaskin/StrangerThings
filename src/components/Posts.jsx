@@ -3,7 +3,6 @@ import Post from "./Post";
 
 import './Posts.css';
 
-//Modularize to individual posts
 //Turn post into separate page upon expansion with all details
 const Posts = ({ posts, removePost}) => {
 

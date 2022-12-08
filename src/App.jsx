@@ -4,10 +4,11 @@ import { fetchMe } from './api/auth';
 import { fetchPosts, deletePost } from './api/posts';
 import Header from './components/Header';
 import Home from './components/Home';
-
-import "./App.css";
+import Profile from './components/Profile';
 import Register from './components/Register';
 import LoginForm from './components/LoginForm';
+
+import "./App.css";
 
 const App = () => {
 	const [token, setToken] = useState(localStorage.getItem("token"));
@@ -48,32 +49,39 @@ const App = () => {
     localStorage.clear();
     setUser({});
     updatePosts()
+    navToHome();
   }
 
+  //not updating page yet.
   const removePost = (postId) => {
     deletePost(token, postId);
     updatePosts();
   }
 
   const navToHome = () => {
-    navigate('/')
+    navigate('/');
   }
 
   const navToRegister = () => {
-    navigate('/register')
+    navigate('/register');
   }
 
   const navToSignIn = () => {
-    navigate('/signIn')
+    navigate('/signIn');
+  }
+
+  const navToProfile = () => {
+    navigate('/profile');
   }
 
   return (
     <div className='root-container'>
-      <Header user={user} token={token} signOut={signOut} navToRegister={navToRegister} navToSignIn={navToSignIn} navToHome={navToHome}/>
+      <Header user={user} token={token} signOut={signOut} navToRegister={navToRegister} navToSignIn={navToSignIn} navToHome={navToHome} navToProfile={navToProfile}/>
       <Routes>
         <Route path='/' element={<Home posts={posts} token={token} updatePosts={updatePosts} removePost={removePost}/>}/>
         <Route path='register' element={<Register setToken={setToken} navToHome={navToHome}/>}/>
         <Route path='signIn' element={<LoginForm setToken={setToken} navToHome={navToHome} updatePosts={updatePosts}/>}/>
+        <Route path='profile' element={<Profile user={user} removePost={removePost}/>} />
       </Routes>
     </div>
   )
