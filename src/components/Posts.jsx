@@ -1,26 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import Post from "./Post";
 import { reversePostSort } from "../helpers";
 
 import './Posts.css';
 
 //Turn post into separate page upon expansion with all details
-const Posts = ({ posts, removePost}) => {
-  let defaultSort = true;
-  let sortDirectionString;
-  const displayPosts = posts;
+const Posts = ({ posts, removePost }) => {
+  const [defaultSort, setDefaultSort] = useState(true);
+  //const [displayPosts, setDisplayPosts] = useState([...posts])
+  let sortDirectionString = 'chronological';
   // set posts in reverse order
-  defaultSort ? null : null
+
+  /* const sortPosts = () => {
+    if (!defaultSort) {
+      sortDirectionString = 'chronological'
+    } else {
+      sortDirectionString = 'reverse chronological'
+    }
+    setDisplayPosts(reversePostSort(displayPosts))
+    setDefaultSort(!defaultSort)
+  } */
+  /* if(displayPosts.length === 0) {
+    setDisplayPosts([...posts])
+  } */
+  //console.log(displayPosts)
 
   return (
-    <>
-      {/* need to fix css first.
+    <div className="sorting-container">
+      {/* need to fix css first. */}
 
-      <button type="button" onClick={() => {!defaultSort}}>Reverse Sort</button>
-      <span>Sorted by {}</span> */}
+      <button type="button" onClick={() => {/* sortPosts */}}>Reverse Sort</button>
+      <span>Sorted by {sortDirectionString}</span>
       <div className="all-posts">{
-        displayPosts.length 
-        ? displayPosts.map(post => {
+        posts.length 
+        ? posts.map(post => {
           return (
             <div key={post._id} className={'post'}>
               <Post post={post} removePost={removePost}/>
@@ -30,7 +43,7 @@ const Posts = ({ posts, removePost}) => {
         : <h2>No posts yet pal.</h2>
       }
       </div>
-    </>
+    </div>
   )
 }
 
