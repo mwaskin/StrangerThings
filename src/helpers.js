@@ -7,3 +7,13 @@ export const removePostFromState = (posts, removedPostId) => {
 export const reversePostSort = (posts) => {
   return posts.reverse()
 }
+
+export const activePostView = (posts, showInactive) => {
+  if (showInactive){
+    return posts
+  } else {
+    return posts.filter(post => {
+      return post.active
+    })
+  }
+}
