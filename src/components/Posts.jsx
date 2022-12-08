@@ -26,14 +26,12 @@ const Posts = ({ posts, userId, removePost, showInactive }) => {
     setDefaultSort(!defaultSort)
   }
   
-  //Handles other posts mutations: isActive, search query
-  //Need to have actively runnning
-  const postFilter = () => {
-    
-    //isActive for profile
-    
+  //Add search query
 
-    //search queries
+  const removePostFromProfile = (postId) => {
+    setDisplayPosts([...displayPosts].filter(post => {
+      return post._id !== postId; 
+    }))
   }
   
   return (
@@ -47,7 +45,7 @@ const Posts = ({ posts, userId, removePost, showInactive }) => {
         ? displayPosts.map(post => {
           return (
             <div key={post._id} className={'post'}>
-              <Post post={post} removePost={removePost} userId={userId}/>
+              <Post post={post} removePost={removePost} userId={userId} removePostFromProfile={removePostFromProfile}/>
             </div> 
           )
         })

@@ -31,7 +31,7 @@ const App = () => {
 		if (token) {
 			getMe();
 		}
-	}, [token]); // Update the user if the token changes
+	}, [token, posts]); // Update the user if the token changes
 
 	useEffect(() => {
 		const getPosts = async () => {
@@ -40,8 +40,6 @@ const App = () => {
 		};
 		getPosts();
 	}, [postFlag]); //when postFlag increments this useEffect will run again
-
-  //write new func to change posts in state on account change so isAuthor will update without API call
 
   const updatePosts = () => {
     setPostFlag(postFlag + 1);

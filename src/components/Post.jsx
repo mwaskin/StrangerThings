@@ -1,7 +1,7 @@
 import React from "react";
 import DeleteButton from "./DeleteButton";
 
-const Post = ({post, userId, removePost}) => {
+const Post = ({post, userId, removePost, removePostFromProfile}) => {
   let deliver;
   post.willDeliver ? deliver = 'You betcha' : deliver = 'Nope.'
   let postClasses;
@@ -27,7 +27,7 @@ const Post = ({post, userId, removePost}) => {
           <p>Price: {post.price}</p>
           <p>Created at: {post.createdAt}</p>
           <p>Updated at: {post.updatedAt}</p>
-          {post.isAuthor || authorIdMatch ? <DeleteButton postId={post._id} removePost={removePost}/> : null}
+          {post.isAuthor || authorIdMatch ? <DeleteButton postId={post._id} removePost={removePost} removePostFromProfile={removePostFromProfile}/> : null}
         </div>
     </>
   )
