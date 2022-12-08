@@ -3,3 +3,7 @@ export const removePostFromState = (posts, removedPostId) => {
     return post._id !== removedPostId;
   })
 }
+
+export const reversePostSort = (posts) => {
+  return posts.reverse()
+}
