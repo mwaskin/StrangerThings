@@ -17,7 +17,7 @@ const UserPosts = ({user, removePost}) => {
       <input type="checkbox" onChange={toggleInactivePosts}/>
       <section className="user-posts">{
         user.posts
-        ? <Posts posts={user.posts} removePost={removePost} showInactive={showInactive}/>
+        ? <Posts posts={user.posts} userId={user._id} removePost={removePost} showInactive={showInactive}/>
         : null
       }</section>
     </>

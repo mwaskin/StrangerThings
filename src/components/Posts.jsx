@@ -1,26 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Post from "./Post";
 import { reversePostSort, activePostView } from "../helpers";
 
 import './Posts.css';
-import { useEffect } from "react";
 
 //Turn post into separate page upon expansion with all details
-const Posts = ({ posts, removePost, showInactive }) => {
+const Posts = ({ posts, userId, removePost, showInactive }) => {
   const [defaultSort, setDefaultSort] = useState(true);
-  const [displayPosts, setDisplayPosts] = useState([])
+  const [displayPosts, setDisplayPosts] = useState(posts)
   const [sortDirectionString, setSortDirectionString] = useState('oldest first');
-  
-  const initDisplayPosts = () => {
-    if(!displayPosts.length) {
-      setDisplayPosts([...posts])
-    }
-  }
 
   useEffect(() => {
     //need to account for reversed posts somewhere, react is not happy with resetting the posts here. Think it would need to be in a separate function
     setDisplayPosts(activePostView(posts, displayPosts, showInactive));
-    console.log(displayPosts)
   }, [showInactive])
 
   // set posts in reverse order
@@ -44,8 +36,6 @@ const Posts = ({ posts, removePost, showInactive }) => {
     //search queries
   }
   
-  initDisplayPosts()
-
   return (
     <div className="sorting-container">
       {/* need to fix css first. */}
@@ -57,7 +47,7 @@ const Posts = ({ posts, removePost, showInactive }) => {
         ? displayPosts.map(post => {
           return (
             <div key={post._id} className={'post'}>
-              <Post post={post} removePost={removePost}/>
+              <Post post={post} removePost={removePost} userId={userId}/>
             </div> 
           )
         })
