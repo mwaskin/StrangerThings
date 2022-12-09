@@ -15,7 +15,7 @@ import "./App.css";
 
 const App = () => {
 	const [token, setToken] = useState(localStorage.getItem("token"));
-	const [user, setUser] = useState({});
+	const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
 	const [posts, setPosts] = useState([]);
   //fetchs posts if the user updates them
   const [postFlag, setPostFlag] = useState(0);
@@ -26,6 +26,7 @@ const App = () => {
 		const getMe = async () => {
 			const userObj = await fetchMe(token);
 			setUser(userObj);
+      localStorage.setItem('user', JSON.stringify(userObj))
 		};
 		//Only run getMe() if we have a token
 		if (token) {
@@ -52,6 +53,10 @@ const App = () => {
     updatePosts()
     navToHome();
   }
+  
+  const editPost = (postId, body) => {
+
+  }
 
   const removePost = (postId) => {
     deletePost(token, postId);
@@ -71,7 +76,7 @@ const App = () => {
   }
 
   const navToProfile = () => {
-    navigate('/profile');
+    navigate('/profile/my_posts');
   }
 
 
@@ -83,8 +88,8 @@ const App = () => {
         <Route path='register' element={<Register setToken={setToken} navToHome={navToHome}/>}/>
         <Route path='signIn' element={<LoginForm setToken={setToken} navToHome={navToHome} updatePosts={updatePosts}/>}/>
         <Route path='profile' element={<Profile user={user}/>}>
-          <Route path='profile/my_posts' element={<UserPosts user={user} removePost={removePost}/>}/>
-          <Route path='profile/my_messages' element={<UserMessages user={user}/>}/>
+          <Route path='my_posts' element={<UserPosts user={user} removePost={removePost}/>}/>
+          <Route path='my_messages' element={<UserMessages user={user}/>}/>
         </Route>
       </Routes>
     </div>

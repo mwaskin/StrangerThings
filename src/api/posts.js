@@ -61,3 +61,18 @@ export const deletePost = async (token, postId) => {
 		console.error("Can't delete that one.", err)
 	}
 }
+
+export const updatePost = async (token, postId, body) => {
+	try {
+		const response = await fetch(`${COHORTAPI}/posts/${postId}`, {
+			method: 'PATCH',
+			headers:  {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			},
+			body: {}
+		})
+	} catch(err) {
+		console.error(`Couldn't update post: ${postId}`, err);
+	}
+}

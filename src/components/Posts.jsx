@@ -15,6 +15,10 @@ const Posts = ({ posts, userId, removePost, showInactive }) => {
     setDisplayPosts(activePostView(posts, displayPosts, showInactive));
   }, [showInactive])
 
+  useEffect(() => {
+    setDisplayPosts(posts)
+  }, [posts])
+  
   // set posts in reverse order
    const sortPosts = () => {
     if (!defaultSort) {
@@ -27,6 +31,10 @@ const Posts = ({ posts, userId, removePost, showInactive }) => {
   }
   
   //Add search query
+
+  /* const addPostToDisplay = () => {
+    setDisplayPosts(posts)
+  } */
 
   const removePostFromProfile = (postId) => {
     setDisplayPosts([...displayPosts].filter(post => {
