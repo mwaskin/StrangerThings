@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { logIn } from "../api/auth";
 
-const LoginForm = (props) => {
+const LoginForm = ({ setToken }) => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const setToken = props.setToken;
+	const [rememberMe, setRememberMe] = useState(false);
 
 	return (
 		<div>
@@ -14,8 +14,9 @@ const LoginForm = (props) => {
 
 					try {
 						const token = await logIn(username, password);
-						setToken(token);
-						localStorage.setItem("token", token);
+						// dispatch({ type: "setToken", payload: token }); //can I update my state in App from here?
+						setToken({type: 'setToken', payload: token});
+						rememberMe ? localStorage.setItem('token', token) : null;
 					} catch (err) {
 						console.error("this token shit didnt work", err);
 					}
@@ -36,6 +37,13 @@ const LoginForm = (props) => {
 					onChange={(e) => setPassword(e.target.value)}
 				/>
 				<input type="submit" value="Log In" />
+				<label htmlFor="remember">Remember Me</label>
+				<input
+					type="checkbox"
+					onChange={() => {
+						setRememberMe(!rememberMe);
+					}}
+				/>
 			</form>
 		</div>
 	);
