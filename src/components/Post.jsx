@@ -2,7 +2,7 @@ import React from "react";
 // import DeleteButton from "./DeleteButton";
 
 const Post = ({ post, userId}) => {
-	let deliver;
+  let deliver;
 	post.willDeliver ? (deliver = "You betcha") : (deliver = "Nope.");
 	let postClasses;
 	post.isAuthor

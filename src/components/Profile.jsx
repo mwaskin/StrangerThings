@@ -1,23 +1,18 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import { useForState } from "../initialState";
 
 // import "./Profile.css";
 
-const Profile = ({ user }) => {
-	// const navigate = useNavigate();
-
-	// const navToMyPosts = () => {
-	// 	navigate("profile/my_posts");
-	// };
-	// const navToMyMessages = () => {
-	// 	navigate("profile/my_messages");
-	// };
-
+const Profile = () => {
+  const state = useForState();
 	return (
 		<>
-			<header>{user.username}'s Profile</header>
-			<NavLink to='/profile/posts'>My Posts</NavLink>
-			<NavLink to='/profile/messages'>My Messages</NavLink>
+			<header>
+        <h1>{state.user.username}'s Profile</h1>
+        <NavLink to='/profile/posts'>My Posts</NavLink>
+        <NavLink to='/profile/messages'>My Messages</NavLink>
+      </header>
 
 			<Outlet />
 		</>

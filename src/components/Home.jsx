@@ -1,12 +1,12 @@
 import React from "react";
+// import { useForState } from "../initialState";
 import Posts from "./Posts";
 // import FormContainer from "./FormContainer";
-import { reducer } from "../initialState";
 
-const Home = ({ posts, token}) => {
+const Home = () => {
 	return (
 		<div className="main">
-			<Posts posts={posts} />
+			<Posts />
 			{/* <FormContainer token={token} posts={posts} setPosts={setPosts} /> */}
 		</div>
 	);

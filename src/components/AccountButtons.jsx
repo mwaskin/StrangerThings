@@ -1,11 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useForState } from "../initialState";
 
-const AccountButtons = ({token, signOut}) => {
+const AccountButtons = ({ signOut}) => {
+  const state = useForState();
   return (
     <div>
       <NavLink to='/' className={'nav-home'}>Home</NavLink>
-      {token ? (
+      {state.token ? (
         <div>
           <NavLink to='/profile/posts'>Profile</NavLink>
           <NavLink to='/'>Sign Out</NavLink>
