@@ -1,19 +1,9 @@
 import React, { useState, useReducer } from "react";
 import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
+import { postReducer } from "../helpers";
 
-const Post = ({post, userId, removePost, removePostFromProfile}) => {
-  const [isEditable, setIsEditable] = useState(false)
-  //try rewriting with useReducer, currently this probably can't be updated individually
-
-  function reducer(state, action){
-    switch (action.type) {
-      case 'alter_title':
-        return {
-          
-        }
-    }
-  }
+const Post = ({post, userId, removePost, removePostFromProfile, editPost}) => {
   const initReducer = {
     'title': post.title,
     'description': post.description,
@@ -21,9 +11,53 @@ const Post = ({post, userId, removePost, removePostFromProfile}) => {
     'location': post.location,
     'willDeliver': post.willDeliver
   }
+  const [isEditable, setIsEditable] = useState(false)
+  const [isChecked, setIsChecked] = useState(initReducer.willDeliver)
 
-  let deliver;
-  post.willDeliver ? deliver = 'You betcha' : deliver = 'Nope.'
+  const [postState, dispatch] = useReducer(postReducer, initReducer);
+
+  const handleInputChange = (e) => {
+    switch (e.target.id) {
+      case 'post-title': {
+        dispatch({
+          type: 'alter_title',
+          newTitle: e.target.value
+        })
+        break;
+      }
+      case 'post-description': {
+        dispatch({
+          type: 'alter_desc',
+          newDesc: e.target.value
+        })
+        break;
+      }
+      case 'post-price': {
+        dispatch({
+          type: 'alter_price',
+          newPrice: e.target.value
+        })
+        break;
+      }
+      case 'post-location': {
+        dispatch({
+          type: 'alter_location',
+          newLocation: e.target.value
+        })
+        break;
+      }
+      case "post-will-deliver": {
+        let deliverBool = postState.willDeliver
+        deliverBool = !deliverBool
+        dispatch({
+          type: 'alter_deliver',
+          newDeliver: deliverBool
+        })
+        break;
+      }
+    }
+  }
+
   let postClasses;
   post.isAuthor ? postClasses = 'post-body is-author' : postClasses = 'post-body'
 
@@ -36,39 +70,40 @@ const Post = ({post, userId, removePost, removePostFromProfile}) => {
   }
   
   return (
+    // should probably move to a separate component, rendering the post from state isn't necessary since patch returns the new post. Overwrite post prop.
     <div>{ isEditable // time to make another giant form... I should generalize NewPostForm, but I won't.
       ? <form onSubmit={(e) => {
         e.preventDefault();
+        removePostFromProfile(post._id)
+        editPost(post._id, postState);
         setIsEditable(false);
-        console.log(postEditObj)
-        //call updatePost
       }}>
         <label htmlFor="post-title">Title: </label>
-        <input type="text" required={true} placeholder="Your title..." value={initReducer.title} onChange={(e) => setPostEditObj(postEditObj.title = e.target.value)}/>
+        <input type="text" required={true} id="post-title" placeholder="Your title..." value={postState.title} onChange={(e) => handleInputChange(e)}/>
 
         <label htmlFor="post-body">Description: </label>
-        <textarea name="description" required={true} id="post-description" cols="30" rows="10" value={initReducer.description} onChange={(e) => setDescription(e.target.value)}></textarea>
+        <textarea name="description" required={true} id="post-description" cols="30" rows="10" value={postState.description} onChange={(e) => handleInputChange(e)}></textarea>
 
         <label htmlFor="post-price">Price: </label>
-        <input type="text" required={true} placeholder="$$$" value={initReducer.price} onChange={(e) => setPrice(e.target.value)}/>
+        <input type="text" required={true} id="post-price" placeholder="$$$" value={postState.price} onChange={(e) => handleInputChange(e)}/>
 
         <label htmlFor="post-location">Location &#40;optional&#41;: </label>
-        <input type="text" value={initReducer.location} onChange={(e) => setLocation(e.target.value)}/>
+        <input type="text" id="post-location" value={postState.location} onChange={(e) => handleInputChange(e)}/>
 
         {/* Not checking box */}
         <label htmlFor="post-will-deliver">Will you deliver?</label>
-        <input type="checkbox" value={initReducer.willDeliver} onChange={() => setWillDeliver(!willDeliver)}/>
+        <input type="checkbox" autoComplete='off' id="post-will-deliver" checked={isChecked} onChange={(e) => {handleInputChange(e); setIsChecked(!isChecked)}}/>
         <input type="submit" value='click me!'/>
         </form>
       : <>
-        <h3>{post.title}</h3>
+        <h3>{postState.title}</h3>
         <div className={postClasses}>
           <h4>Author: {post.author.username}</h4>
           <div className={`${post.active.toString()} isActive`}></div>
-          <p>{post.description}</p>
-          <p>Location: {post.location ? post.location : null}</p>
-          <p>Delivery?: {deliver}</p>
-          <p>Price: {post.price}</p>
+          <p>{postState.description}</p>
+          <p>Location: {postState.location}</p>
+          <p>Delivery?: {postState.willDeliver ? 'You betcha' : 'Nope.'}</p>
+          <p>Price: {postState.price}</p>
           <p>Created at: {post.createdAt}</p>
           <p>Updated at: {post.updatedAt}</p>
           {post.isAuthor || authorIdMatch

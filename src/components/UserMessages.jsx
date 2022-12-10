@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Message from "./Message";
 
 const UserMessages = ({user}) => {
+  const [isMessageForm, setIsMessageForm] = useState(false)
+
   return (
     <section className="user-messages">{
       user.messages && user.messages.length
       ? user.messages.map(message => {
         return (
-          <div key={message._id} className="message">
+          isMessageForm ? null //message form here
+          :<div key={message._id} className="message">
             <Message postHead={message.post} fromUser={message.fromUser} content={message.content}/>
           </div>
         )
