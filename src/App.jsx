@@ -50,6 +50,7 @@ const App = () => {
 					{/* <Route path='/post/:postId' element={<Post />} /> */}
 					<Route path="/sign-in" element={<LoginForm />} />
 					<Route path="/register" element={<Register />} />
+					{/* <Route path="/send-message" element={<MessageForm />} /> */}
 					<Route path="/profile" element={<Profile />}>
 						<Route
 							path="/profile/posts"

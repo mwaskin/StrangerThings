@@ -67,3 +67,22 @@ export const logIn = async (username, password) => {
 		);
 	}
 };
+
+export const submitMessage = async (token, postId) => {
+	try{
+		await fetch(`${COHORTAPI}/posts/${postId}/messages`, {
+			method: "POST",
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			},
+			body: JSON.stringify({
+				message: {
+					content: "Do you still have this?  Would you take $10 less?"
+				}
+			})
+		})
+	} catch (error) {
+		console.error(error);
+	}
+}

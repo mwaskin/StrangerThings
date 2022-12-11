@@ -1,4 +1,5 @@
 import React from "react";
+import { Route } from "react-router-dom";
 import { useForState } from "../initialState";
 import Post from "./Post";
 
@@ -10,9 +11,14 @@ const Posts = () => {
   const state = useForState();
   // console.log(state);
   const posts = state.posts;
+  // if (Route.path === '/profile/posts'){
+  //   posts = state.user.posts;
+  // } else {
+  //   posts = state.posts;
+  // }
   
   return (
-    <div className="all-posts">{
+    <div>{
       posts.map(post => {
         return (
           <div key={post._id} className={'post'}>

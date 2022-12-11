@@ -1,4 +1,5 @@
 import React from "react";
+import MessageButton from "./MessageButton";
 // import DeleteButton from "./DeleteButton";
 
 const Post = ({ post, userId}) => {
@@ -29,6 +30,7 @@ const Post = ({ post, userId}) => {
 				<p>Price: {post.price}</p>
 				<p>Created at: {post.createdAt}</p>
 				<p>Updated at: {post.updatedAt}</p>
+				<MessageButton post={post}/>
 				{/* {post.isAuthor || authorIdMatch ? (
 					<DeleteButton
 						postId={post._id}
