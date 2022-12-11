@@ -77,3 +77,4 @@ Adam Thurs Night:
 - [ ] update to matthew's navLinks
 - [ ] rewrite sort to use updated at instead of just reversing
 - [ ] Change post buttons to navlinks or the like and route to component
+- [ ] show inactive posts slightly broken to accomodate displayPosts updating from state
