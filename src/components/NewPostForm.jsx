@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { submitPost } from "../api/posts";
 
-import './NewPostForm.css'
+import './styles/NewPostForm.css'
 
 const NewPostForm = ({token, posts, setPosts}) => {
   const [title, setTitle] = useState('')

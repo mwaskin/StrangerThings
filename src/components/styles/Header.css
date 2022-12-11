@@ -1,0 +1,14 @@
+.header {
+  padding-top: .5rem;
+  margin: .5rem ;
+  background-color: #00522D;
+  box-shadow: 3px 3px 15px -3px rgba(0, 0, 0, .6);
+}
+
+.header h1 {
+  margin: .5rem;
+}
+
+.header button {
+  font-size: 18px;
+}

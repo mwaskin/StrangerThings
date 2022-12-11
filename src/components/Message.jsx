@@ -1,17 +1,15 @@
 import React from "react";
 
-const Message = ({id, postObj, fromUser, content}) => {
-	console.log(fromUser.username);
-  
+const Message = ({postHead, fromUser, content}) => {
+  //Can't check who we sent the message too yet.
+  //Write a getPostById func
   return (
-  <div>message
-    {/* <h1>From: {fromUser.username}</h1>
-    <h3>Re: {postObj.title}</h3>
-    <h6>ListingID: {postObj.id}</h6>
-    <p>Message: {content}</p> */}
-  </div>
-  );
-
-};
+    <div className="message-card">
+    <h4>{postHead.title}</h4> 
+    <p>From: {fromUser.username}</p>
+    <p>{content}</p>
+    </div>
+  )
+}
 
 export default Message;

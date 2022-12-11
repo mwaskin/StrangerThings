@@ -61,3 +61,46 @@ export const deletePost = async (token, postId) => {
 		console.error("Can't delete that one.", err)
 	}
 }
+
+export const updatePost = async (token, postId, body) => {
+	try {
+		const postObj = {post: body}
+		const response = await fetch(`${COHORTAPI}/posts/${postId}`, {
+			method: 'PATCH',
+			headers:  {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			},
+			body: JSON.stringify(postObj)
+		})
+		const { data:
+		{ post }, 
+		} = await response.json()
+		return post;
+	} catch(err) {
+		console.error(`Couldn't update post: ${postId}`, err);
+	}
+}
+
+export const submitMessage = async (token, postId, messageBody) => {
+	try{
+		const response = await fetch(`${COHORTAPI}/posts/${postId}/messages`, {
+			method: "POST",
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			},
+			body: JSON.stringify({
+				message: {
+					content: messageBody
+				}
+			})
+		})
+		const { data: 
+		{message}
+	} = await response.json()
+	console.log(message);
+	} catch (error) {
+		console.error(error);
+	}
+}

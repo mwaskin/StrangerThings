@@ -9,7 +9,8 @@ const Register = ({setToken, navToHome}) => {
 	return (
 		<div>
       <h2>Register for Our Site Here</h2>
-			<form
+			<form 
+        className="auth-form"
 				onSubmit={async (e) => {
 					e.preventDefault();
 
@@ -23,22 +24,26 @@ const Register = ({setToken, navToHome}) => {
           console.error('this token shit didnt work', err)
         }
       }}>
-        <label htmlFor="username">Username: </label>
-        <input
-          type="text"
-          value={username}
-          minLength={1}
-          required={true}
-          placeholder='username'
-          onChange={(e) => setUsername(e.target.value)} />
-        <label htmlFor="password">Password: </label>
-        <input
-          type="password"
-          value={password}
-          minLength={4}
-          required={true}
-          placeholder='password'
-          onChange={(e) => setPassword(e.target.value)} />
+        <div>
+          <label htmlFor="username">Username: </label>
+          <input
+            type="text"
+            value={username}
+            minLength={1}
+            required={true}
+            placeholder='username'
+            onChange={(e) => setUsername(e.target.value)} />
+        </div>
+        <div>
+          <label htmlFor="password">Password: </label>
+          <input
+            type="password"
+            value={password}
+            minLength={4}
+            required={true}
+            placeholder='password'
+            onChange={(e) => setPassword(e.target.value)} />
+        </div>
         <input type='submit' value="Register Here!" />
         <label htmlFor="remember">Remember Me</label>
         <input type="checkbox" onChange={() => { setRememberMe(!rememberMe) }} />

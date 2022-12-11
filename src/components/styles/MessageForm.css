@@ -1,0 +1,14 @@
+.post-message-container {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: 0 auto .8rem auto;
+}
+
+.post-message-container p {
+  margin: .3rem;
+}
+
+.post-message-container label {
+  margin-top: 1rem;
+}

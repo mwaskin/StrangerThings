@@ -9,7 +9,8 @@ const LoginForm = ({ setToken, navToHome, updatePosts }) => {
 	return (
 		<div>
 			<h2>Log in Here!</h2>
-			<form
+			<form 
+				className="auth-form"
 				onSubmit={async (e) => {
 					e.preventDefault();
 
@@ -24,20 +25,24 @@ const LoginForm = ({ setToken, navToHome, updatePosts }) => {
 					}
 				}}
 			>
-				<label htmlFor="username">Username: </label>
-				<input
-					type="text"
-					value={username}
-					placeholder="username"
-					onChange={(e) => setUsername(e.target.value)}
-				/>
-				<label htmlFor="password">Password: </label>
-				<input
-					type="password"
-					value={password}
-					placeholder="password"
-					onChange={(e) => setPassword(e.target.value)}
-				/>
+				<div>
+					<label htmlFor="username">Username: </label>
+					<input
+						type="text"
+						value={username}
+						placeholder="username"
+						onChange={(e) => setUsername(e.target.value)}
+					/>
+				</div>
+				<div>
+					<label htmlFor="password">Password: </label>
+					<input
+						type="password"
+						value={password}
+						placeholder="password"
+						onChange={(e) => setPassword(e.target.value)}
+					/>
+				</div>
 				<input type="submit" value="Log In" />
 				<label htmlFor="remember">Remember Me</label>
 				<input

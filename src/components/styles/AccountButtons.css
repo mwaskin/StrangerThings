@@ -1,0 +1,9 @@
+.account-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: .5rem;
+}
+
+.delete-button {
+  background-color: #E8130C;
+}

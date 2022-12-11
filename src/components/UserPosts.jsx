@@ -4,12 +4,9 @@ import Posts from "./Posts";
 const UserPosts = ({user, removePost}) => {
   const [showInactive, setShowInactive] = useState(false)
 
-
   const toggleInactivePosts = () => {
     setShowInactive(!showInactive);
   }
-
-  
   
   return (
     <>
@@ -17,7 +14,7 @@ const UserPosts = ({user, removePost}) => {
       <input type="checkbox" onChange={toggleInactivePosts}/>
       <section className="user-posts">{
         user.posts
-        ? <Posts posts={user.posts} userId={user._id} removePost={removePost} showInactive={showInactive}/>
+        ? <Posts user={user} posts={user.posts} userId={user._id} removePost={removePost} showInactive={showInactive}/>
         : null
       }</section>
     </>
