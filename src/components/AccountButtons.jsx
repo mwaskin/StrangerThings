@@ -35,3 +35,5 @@ const AccountButtons = ({
 		</div>
 	);
 };
+
+export default AccountButtons;

@@ -15,7 +15,7 @@ import "./App.css";
 
 const App = () => {
 	const [token, setToken] = useState(localStorage.getItem("token"));
-	const [user, setUser] = useState({});
+	const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
 	const [posts, setPosts] = useState([]);
 	//fetchs posts if the user updates them
 	const [postFlag, setPostFlag] = useState(0);
@@ -26,6 +26,7 @@ const App = () => {
 		const getMe = async () => {
 			const userObj = await fetchMe(token);
 			setUser(userObj);
+			localStorage.setItem('user', JSON.stringify(userObj));
 		};
 		//Only run getMe() if we have a token
 		if (token) {
