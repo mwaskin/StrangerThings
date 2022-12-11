@@ -81,3 +81,26 @@ export const updatePost = async (token, postId, body) => {
 		console.error(`Couldn't update post: ${postId}`, err);
 	}
 }
+
+export const submitMessage = async (token, postId, messageBody) => {
+	try{
+		const response = await fetch(`${COHORTAPI}/posts/${postId}/messages`, {
+			method: "POST",
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			},
+			body: JSON.stringify({
+				message: {
+					content: messageBody
+				}
+			})
+		})
+		const { data: 
+		{message}
+	} = await response.json()
+	console.log(message);
+	} catch (error) {
+		console.error(error);
+	}
+}

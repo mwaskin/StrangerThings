@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import Post from "./Post";
 import { reversePostSort, activePostView } from "../helpers";
 
-import './Posts.css';
+import './styles/Posts.css';
 
 //Turn post into separate page upon expansion with all details
-const Posts = ({ posts, userId, removePost, showInactive, editPost }) => {
+const Posts = ({ user, token, posts, userId, removePost, showInactive, editPost }) => {
   const [defaultSort, setDefaultSort] = useState(true);
   const [displayPosts, setDisplayPosts] = useState(posts)
   const [searchedPosts, setSearchedPosts] = useState([])
@@ -31,12 +31,6 @@ const Posts = ({ posts, userId, removePost, showInactive, editPost }) => {
     setDisplayPosts(reversePostSort(displayPosts))
     setDefaultSort(!defaultSort)
   }
-  
-  //Add search query
-
-  /* const addPostToDisplay = () => {
-    setDisplayPosts(posts)
-  } */
 
   const queryMatches = (post, query) => {
     const lowerQuery = query.toLowerCase();
@@ -86,20 +80,20 @@ const Posts = ({ posts, userId, removePost, showInactive, editPost }) => {
   
   return (
     <div className="sorting-container">
-      <label htmlFor="post-search">Find a post: </label>
-      {/* Doesn't work for deleting characters, reset button is a shim */}
-      <input type='search' id='post-search' onChange={(e) => {setSearchQuery(e.target.value); returnSearch()}}/>
-      <button type="button" onClick={() => {setDisplayPosts(posts)}}>Reset Search</button>
-      <button type="button" onClick={() => {sortPosts()}}>Reverse Sort</button>
-      <span>Sorted by {sortDirectionString}</span>
+      <div className="filters-container">
+        <label htmlFor="post-search">Find a post: </label>
+        {/* Doesn't work for deleting characters, reset button is a shim */}
+        <input type='search' id='post-search' onChange={(e) => {setSearchQuery(e.target.value); returnSearch()}}/>
+        <button type="button" onClick={() => {setDisplayPosts(posts)}}>Reset Search</button>
+        <button type="button" onClick={() => {sortPosts()}}>Reverse Sort</button>
+        <span>Sorted by {sortDirectionString}</span>
+      </div>
       <div className="all-posts">{
         displayPosts.length 
         ? displayPosts.map(post => {
           return (
-            //Could add conditional rendering here to display edit, then swap post for the one returned by the API, might break the map tho.
-            <div key={post._id} className={'post'}>
-              <Post post={post} removePost={removePost} userId={userId} removePostFromProfile={removePostFromProfile} editPost={editPost}/>
-              {/* Conditional render messageForm */}
+            <div key={post._id} className={'post card'}>
+              <Post user={user} token={token} post={post} removePost={removePost} userId={userId} removePostFromProfile={removePostFromProfile} editPost={editPost}/>
             </div> 
           )
         })

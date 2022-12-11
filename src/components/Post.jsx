@@ -1,9 +1,11 @@
 import React, { useState, useReducer } from "react";
 import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
+import MessageButton from "./MessageButton";
+import MessageForm from "./MessageForm";
 import { postReducer } from "../helpers";
 
-const Post = ({post, userId, removePost, removePostFromProfile, editPost}) => {
+const Post = ({user, token, post, userId, removePost, removePostFromProfile, editPost}) => {
   const initReducer = {
     'title': post.title,
     'description': post.description,
@@ -13,6 +15,7 @@ const Post = ({post, userId, removePost, removePostFromProfile, editPost}) => {
   }
   const [isEditable, setIsEditable] = useState(false)
   const [isChecked, setIsChecked] = useState(initReducer.willDeliver)
+  const [isPost, setIsPost] = useState(true)
 
   const [postState, dispatch] = useReducer(postReducer, initReducer);
 
@@ -71,8 +74,9 @@ const Post = ({post, userId, removePost, removePostFromProfile, editPost}) => {
   
   return (
     // should probably move to a separate component, rendering the post from state isn't necessary since patch returns the new post. Overwrite post prop.
-    <div>{ isEditable // time to make another giant form... I should generalize NewPostForm, but I won't.
-      ? <form onSubmit={(e) => {
+    isPost
+    ? <div>{ isEditable // time to make another giant form... I should generalize NewPostForm, but I won't.
+      ? <form className="edit-form" onSubmit={(e) => {
         e.preventDefault();
         removePostFromProfile(post._id)
         editPost(post._id, postState);
@@ -90,31 +94,45 @@ const Post = ({post, userId, removePost, removePostFromProfile, editPost}) => {
         <label htmlFor="post-location">Location &#40;optional&#41;: </label>
         <input type="text" id="post-location" value={postState.location} onChange={(e) => handleInputChange(e)}/>
 
-        {/* Not checking box */}
         <label htmlFor="post-will-deliver">Will you deliver?</label>
         <input type="checkbox" autoComplete='off' id="post-will-deliver" checked={isChecked} onChange={(e) => {handleInputChange(e); setIsChecked(!isChecked)}}/>
         <input type="submit" value='click me!'/>
         </form>
-      : <>
+      : 
+      <>
         <h3>{postState.title}</h3>
-        <div className={postClasses}>
-          <h4>Author: {post.author.username}</h4>
-          <div className={`${post.active.toString()} isActive`}></div>
+        <div className={postClasses}>{
+          post.author.username 
+          ? <h4>Author: {post.author.username}</h4>
+          : null
+        }{
+        user
+        ?<div className="active-container">
+            <span>active: </span>
+            <div className={`${post.active.toString()} isActive`}></div>
+          </div>
+        : null
+        }
           <p>{postState.description}</p>
           <p>Location: {postState.location}</p>
           <p>Delivery?: {postState.willDeliver ? 'You betcha' : 'Nope.'}</p>
           <p>Price: {postState.price}</p>
-          <p>Created at: {post.createdAt}</p>
           <p>Updated at: {post.updatedAt}</p>
           {post.isAuthor || authorIdMatch
-          ? <DeleteButton postId={post._id} removePost={removePost} removePostFromProfile={removePostFromProfile}/>
+          ? <>
+              <DeleteButton postId={post._id} removePost={removePost} removePostFromProfile={removePostFromProfile}/>
+              <EditButton postId={post._id} post={post} setIsEditable={setIsEditable}/>
+            </>
           : null}
-          {post.isAuthor || authorIdMatch
-          ? <EditButton postId={post._id} post={post} setIsEditable={setIsEditable}/>
+          {!(post.isAuthor || authorIdMatch) && token
+          ? <>
+              <MessageButton post={post} isPost={isPost} setIsPost={setIsPost}/>
+            </>
           : null}
         </div>
       </>
     }</div>
+    : <MessageForm token={token} post={post} isPost={isPost} setIsPost={setIsPost}/>
   )
 }
 

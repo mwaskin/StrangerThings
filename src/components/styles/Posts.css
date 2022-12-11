@@ -1,0 +1,58 @@
+.sorting-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 70%;
+}
+
+.all-posts {
+  
+}
+
+.filters-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card {
+  font-size: 18px;
+  border: solid 10px #00522D;
+  border-radius: 10px;
+  background-color: #ECDE82;
+  color: #00140B;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 3px 3px 15px -3px rgba(0, 0, 0, .6);
+}
+
+.post-body {
+  text-align: left;
+}
+
+.active-container {
+  display: flex;
+}
+
+.isActive {
+  width: 30px;
+  height: 30px;
+  margin-left: .8rem;
+}
+
+/* Change to a checkbox or the like */
+.true {
+  background-color: green;
+}
+
+.false {
+  background-color: red;
+}
+
+/* .is-author {
+  border: dotted 2px #3f1603;
+} */
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+}

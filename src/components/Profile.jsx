@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 
-import './Profile.css'
+import './styles/Profile.css'
 
 const Profile = ({user}) => {
   const navigate = useNavigate();
@@ -16,10 +16,12 @@ const Profile = ({user}) => {
 
   return (
     <>
-      <header>{user.username}'s Profile</header>
-      <button type="button" onClick={navToMyPosts}>My Posts</button>
-      <button type="button" onClick={navToMyMessages}>My Messages</button>     
-      {/* Swap outlet for ternary */}
+      <div className="profile-buttons">
+        <header>{user.username}'s Profile</header>
+        <button type="button" onClick={navToMyPosts}>My Posts</button>
+        <button type="button" onClick={navToMyMessages}>My Messages</button>
+      </div>
+      
       <Outlet />
     </>
   )

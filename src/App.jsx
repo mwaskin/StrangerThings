@@ -28,11 +28,10 @@ const App = () => {
 			setUser(userObj);
       localStorage.setItem('user', JSON.stringify(userObj))
 		};
-		//Only run getMe() if we have a token
 		if (token) {
 			getMe();
 		}
-	}, [token, posts]); // Update the user if the token changes
+	}, [token, posts]);
 
 	useEffect(() => {
 		const getPosts = async () => {
@@ -40,7 +39,7 @@ const App = () => {
 			setPosts(apiPosts);
 		};
 		getPosts();
-	}, [postFlag]); //when postFlag increments this useEffect will run again
+	}, [postFlag]);
 
   const updatePosts = () => {
     setPostFlag(postFlag + 1);
@@ -56,11 +55,6 @@ const App = () => {
   
   const editPost = async (postId, body) => {
     const updatedPost = await updatePost(token, postId, body);
-    // Need to remove old post from state first
-    //setPosts(removePostFromState(posts, postId))
-    
-    //make an API call
-    //setPosts([...posts, updatedPost]);
     updatePosts()
   }
 
