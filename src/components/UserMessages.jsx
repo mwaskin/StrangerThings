@@ -41,3 +41,5 @@ const UserMessages = ({user}) => {
     }</section>
   )
 }
+
+export default UserMessages;

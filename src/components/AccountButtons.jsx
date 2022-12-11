@@ -19,3 +19,5 @@ const AccountButtons = ({token, signOut, navToHome, navToRegister, navToSignIn, 
     }</div>
   )
 }
+
+export default AccountButtons;
